@@ -6,6 +6,7 @@ const IntervalTrainer = (() => {
     let intervalNumber = 0;
     let correctNote = '';
     let streak = 0;
+    let highScore = 0;
 
     // Função para gerar uma nova questão
     function generateQuestion() {
@@ -50,6 +51,7 @@ const IntervalTrainer = (() => {
     function checkAnswer(selectedNote, button) {
         const feedbackMessage = document.getElementById('feedback-message');
         const streakCount = document.getElementById('streak-count');
+        const highScoreElement = document.getElementById('high-score');
 
         if (selectedNote === correctNote) {
             streak++;
@@ -77,13 +79,24 @@ const IntervalTrainer = (() => {
             streakCount.textContent = streak;
         }
 
+        // Atualiza o recorde se a sequência atual for maior
+        if (streak > highScore) {
+            highScore = streak;
+            // Armazena o novo recorde no localStorage
+            localStorage.setItem('highScore', highScore);
+            // Atualiza o display do recorde
+            if (highScoreElement) {
+                highScoreElement.textContent = highScore;
+            }
+        }
+
         // Desabilitar botões de resposta após a seleção
         disableButtons(true);
 
         // Após 2 segundos, gerar nova questão
         setTimeout(() => {
             generateQuestion();
-        }, 1000);
+        }, 2000);
     }
 
     // Função para desabilitar ou habilitar os botões de resposta
@@ -102,6 +115,20 @@ const IntervalTrainer = (() => {
         });
     }
 
+    // Função para carregar o recorde do localStorage
+    function loadHighScore() {
+        const storedHighScore = localStorage.getItem('highScore');
+        if (storedHighScore !== null) {
+            highScore = parseInt(storedHighScore, 10);
+        } else {
+            highScore = 0;
+        }
+        const highScoreElement = document.getElementById('high-score');
+        if (highScoreElement) {
+            highScoreElement.textContent = highScore;
+        }
+    }
+
     // Inicializa os event listeners dos botões
     function initEventListeners() {
         // Botões de notas
@@ -116,6 +143,7 @@ const IntervalTrainer = (() => {
 
     // Inicializa a aplicação
     function init() {
+        loadHighScore();
         initEventListeners();
         generateQuestion();
     }

@@ -50,6 +50,11 @@ main {
     color: #28A745;
 }
 
+#high-score {
+    font-weight: 600;
+    color: #FF8C00; /* Uma cor para destacar o recorde */
+}
+
 /* Botões */
 .buttons {
     display: flex;
