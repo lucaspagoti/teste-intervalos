@@ -27,7 +27,7 @@ header {
 }
 
 h1 {
-    font-size: 36px;
+    font-size: 2em; /* Ajuste para unidades relativas */
     font-weight: 600;
 }
 
@@ -41,7 +41,7 @@ main {
 }
 
 .display p {
-    font-size: 22px;
+    font-size: 1.2em; /* Unidades relativas */
     margin: 10px 0;
 }
 
@@ -61,7 +61,7 @@ main {
 
 .btn {
     padding: 15px 25px;
-    font-size: 18px;
+    font-size: 1em; /* Unidades relativas */
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -85,7 +85,7 @@ main {
 }
 
 .feedback {
-    font-size: 24px;
+    font-size: 1.2em; /* Unidades relativas */
     min-height: 30px;
     margin-bottom: 30px;
 }
@@ -94,14 +94,57 @@ main {
     margin: 0;
 }
 
+/* Media Queries para Responsividade */
 @media (max-width: 600px) {
+    h1 {
+        font-size: 1.5em;
+    }
+
+    .display p {
+        font-size: 1em;
+    }
+
     .buttons {
         flex-direction: column;
         align-items: center;
+        gap: 10px;
     }
 
     .btn {
         width: 100%;
-        max-width: 300px;
+        max-width: 280px;
+        padding: 12px 20px;
+    }
+
+    .btn:not(:last-child) {
+        margin-bottom: 10px;
+    }
+
+    .feedback {
+        font-size: 1em;
+    }
+}
+
+/* Ajustes Específicos para iPhone SE */
+@media (max-width: 320px) {
+    body {
+        padding: 10px;
+    }
+
+    .btn {
+        padding: 10px 15px;
+        font-size: 0.9em;
+    }
+
+    .buttons {
+        gap: 8px;
+    }
+
+    .display p {
+        font-size: 0.9em;
+    }
+
+    .feedback {
+        font-size: 0.9em;
     }
 }
