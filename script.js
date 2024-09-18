@@ -15,6 +15,9 @@ const IntervalTrainer = (() => {
             feedbackMessage.textContent = '';
         }
 
+        // Limpa classes dos botões
+        resetButtonStyles();
+
         // Gera uma nota inicial aleatória
         startingNote = notes[Math.floor(Math.random() * notes.length)];
 
@@ -44,7 +47,7 @@ const IntervalTrainer = (() => {
     }
 
     // Função para verificar a resposta do usuário
-    function checkAnswer(selectedNote) {
+    function checkAnswer(selectedNote, button) {
         const feedbackMessage = document.getElementById('feedback-message');
         const streakCount = document.getElementById('streak-count');
 
@@ -53,10 +56,19 @@ const IntervalTrainer = (() => {
             if (feedbackMessage) {
                 feedbackMessage.textContent = 'Correto!';
             }
+            // Destaca o botão correto
+            button.classList.add('correct');
         } else {
             streak = 0;
             if (feedbackMessage) {
                 feedbackMessage.textContent = `Incorreto. A resposta correta é ${correctNote}.`;
+            }
+            // Destaca o botão incorreto
+            button.classList.add('incorrect');
+            // Destaca o botão correto
+            const correctButton = document.querySelector(`button[data-note="${correctNote}"]`);
+            if (correctButton) {
+                correctButton.classList.add('correct');
             }
         }
 
@@ -71,7 +83,7 @@ const IntervalTrainer = (() => {
         // Após 2 segundos, gerar nova questão
         setTimeout(() => {
             generateQuestion();
-        }, 500);
+        }, 1000);
     }
 
     // Função para desabilitar ou habilitar os botões de resposta
@@ -82,6 +94,14 @@ const IntervalTrainer = (() => {
         });
     }
 
+    // Função para limpar os estilos dos botões
+    function resetButtonStyles() {
+        const buttons = document.querySelectorAll('.buttons button');
+        buttons.forEach(button => {
+            button.classList.remove('correct', 'incorrect');
+        });
+    }
+
     // Inicializa os event listeners dos botões
     function initEventListeners() {
         // Botões de notas
@@ -89,7 +109,7 @@ const IntervalTrainer = (() => {
         buttons.forEach(button => {
             button.addEventListener('click', () => {
                 const selectedNote = button.getAttribute('data-note');
-                checkAnswer(selectedNote);
+                checkAnswer(selectedNote, button);
             });
         });
     }
