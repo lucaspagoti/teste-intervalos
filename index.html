@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Treinamento de Intervalos Musicais</title>
+    <!-- Vinculação ao arquivo CSS externo -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>Treinamento de Intervalos Musicais</h1>
+    </header>
+
+    <main>
+
+        <section class="display">
+            <p>Nota inicial: <span id="starting-note"></span></p>
+            <p>Intervalo: <span id="interval-number"></span></p>
+            <p>Streak: <span id="streak-count">0</span></p>
+        </section>
+
+        <section class="buttons">
+            <button data-note="Do" class="btn btn-note">Dó</button>
+            <button data-note="Re" class="btn btn-note">Ré</button>
+            <button data-note="Mi" class="btn btn-note">Mi</button>
+            <button data-note="Fa" class="btn btn-note">Fá</button>
+            <button data-note="Sol" class="btn btn-note">Sol</button>
+            <button data-note="La" class="btn btn-note">Lá</button>
+            <button data-note="Si" class="btn btn-note">Si</button>
+        </section>
+
+        <section class="feedback">
+            <p id="feedback-message" role="alert" aria-live="assertive"></p>
+        </section>
+
+        <!-- Removemos o botão "Próxima Questão" -->
+
+    </main>
+
+    <!-- Inclusão do script.js -->
+    <script src="script.js"></script>
+
+</body>
+</html>
