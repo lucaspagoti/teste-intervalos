@@ -19,6 +19,9 @@ const IntervalTrainer = (() => {
         // Limpa classes dos botões
         resetButtonStyles();
 
+        // Embaralha os botões
+        shuffleButtons();
+
         // Gera uma nota inicial aleatória
         startingNote = notes[Math.floor(Math.random() * notes.length)];
 
@@ -45,6 +48,18 @@ const IntervalTrainer = (() => {
 
         // Habilita os botões de resposta
         disableButtons(false);
+    }
+
+    // Função para embaralhar os botões
+    function shuffleButtons() {
+        const buttonsContainer = document.querySelector('.buttons');
+        const buttons = Array.from(buttonsContainer.children);
+        // Embaralha o array de botões usando o algoritmo de Fisher-Yates
+        for (let i = buttons.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            buttonsContainer.insertBefore(buttons[j], buttons[i]);
+            [buttons[i], buttons[j]] = [buttons[j], buttons[i]];
+        }
     }
 
     // Função para verificar a resposta do usuário
